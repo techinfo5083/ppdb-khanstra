@@ -87,8 +87,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </nav>
   <!-- /.navbar -->
-
-  @yield('content')
+  <div class="content-wrapper">
+    @yield('content')
+  </div>
 
   <!-- Main Footer -->
   <footer class="main-footer">
@@ -105,11 +106,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
+@livewireScripts
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    </script>
+    ...
+    <x-livewire-alert::scripts />
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-@livewireScripts
 </body>
 </html>
