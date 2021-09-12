@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +15,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Route::get('adminHome', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin:1');
+Route::get('/dashboard', function()  { return view('admin/dashboard'); })->middleware('is_admin');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/daftar', function () {
-    return view('daftar');
-});
+Route::get('/pendaftaran', function () {
+    return view('user.pendaftaran');
+})->name('pendaftaran');
 
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-});
+Route::get('/pengumuman', function () {
+    return view('user.pengumuman');
+})->name('pengumuman');
+
+// Route::get('/dashboard', function () {
+//     return view('admin/dashboard');
+// });
 Route::get('/semuaData', function () {
     return view('admin/dataAll');
 });
@@ -39,3 +51,6 @@ Route::get('/akutansi', function () {
 Route::get('/teknikSepedaMotor', function () {
     return view('admin/tsm');
 });
+
+Auth::routes();
+
