@@ -5,32 +5,30 @@ namespace App\Http\Livewire\User;
 use Livewire\Component;
 use App\Models\CalonSiswa;
 use App\Models\Jurusan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CreatePendaftaran extends Component
 {
-    public $nisn;
-    public $nama;
-    public $jk;
-    public $alamat;
-    public $tempat_lahir;
-    public $tgl_lahir;
-    public $nama_sekolah;
-    public $id_jurusan;
-    public $no_telp;
+    public $nisn, $nama, $jk, $alamat, $tempat_lahir;
+    public $tgl_lahir, $nama_sekolah, $id_jurusan, $no_telp;
 
     public function render()
     {
         $data = [
             'jurusan' => Jurusan::all(),
+            'nama_siswa' => CalonSiswa::select('nama')->where('id_user',auth()->user()->id)->get(),
         ];
         
+        // $id_user = CalonSiswa::select('nama')->where('id_user',auth()->user()->id)->get();
+        // dd($id_user);
         return view('livewire.user.create-pendaftaran', $data);
     }
 
     private function clearInput()
     {
         $this->nisn = null;
-        $this->nisn = null;
+        $this->nama = null;
         $this->jk = null;
         $this->alamat = null;
         $this->tempat_lahir = null;
@@ -55,6 +53,7 @@ class CreatePendaftaran extends Component
         ]);
 
         $CalonSiswa = CalonSiswa::create([
+            'id_user'       => auth()->user()->id,
             'nisn'          => $this->nisn,
             'nama'          => $this->nama,
             'jk'            => $this->jk,
@@ -69,7 +68,7 @@ class CreatePendaftaran extends Component
         $this->clearInput();
         $this->alert('success', 'Data Berhasil di Tambahkan!', [
             'position' =>  'top', 
-            'timer' =>  5000,  
+            'timer' =>  3000,  
             'toast' =>  true, 
             'text' =>  '', 
             'confirmButtonText' =>  'Ok', 
@@ -77,9 +76,11 @@ class CreatePendaftaran extends Component
             'showCancelButton' =>  false, 
             'showConfirmButton' =>  false, 
         ]);
-        // return redirect()->to('/pendaftaram');
 
+    }
 
+    public function sudahDaftar()
+    {
 
     }
 

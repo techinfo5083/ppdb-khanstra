@@ -23,9 +23,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+  <nav class="navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="index3.html" class="navbar-brand">
+      <a href="{{ route('login') }}" class="navbar-brand">
         <img src="/image/Logo.png" alt="SMK Kharisma Nusantara Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Khanstra</span>
@@ -37,56 +37,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
-        <ul class="nav nav-pills">
+        <ul class="nav navbar-nav mr-auto">
           <li class="nav-item">
             <a href="{{ route('home') }}" class="nav-link {{ (request()->is('home')) ? 'active' : '' }}" class="nav-link active">Home</a>
+            @if(request()->is('home'))
+            <hr class="border-primary" style="margin-top: -10px; border: 1px solid;">
+            @endif
           </li>
           <li class="nav-item">
             <a href="{{ route('pendaftaran') }}" class="nav-link {{ (request()->is('pendaftaran')) ? 'active' : '' }}">Pendaftaran</a>
+            @if(request()->is('pendaftaran'))
+            <hr class="border-primary" style="margin-top: -10px; border: 1px solid;">
+            @endif
           </li>
           <li class="nav-item">
             <a href="{{ route('pengumuman') }}" class="nav-link {{  (request()->is('pengumuman')) ? 'active' : '' }}">Pengumuman</a>
+            @if(request()->is('pengumuman'))
+            <hr class="border-primary" style="margin-top: -10px; border: 1px solid;">
+            @endif
           </li>
+          @guest
+            @if (Route::has('login'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+            @endif
+
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+
+            @else
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }}
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+            @endguest
         </ul>
       </div>
 
       <!-- Right navbar links -->
-        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            @guest
-                @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                @endif
-
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @endif
-            @else
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            @endguest
+        <ul class=" nav navbar-nav my-2 my-lg-0">
+            
         </ul>
     </div>
   </nav>
   <!-- /.navbar -->
+  
   <div class="content-wrapper">
     @yield('content')
   </div>
@@ -95,10 +107,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      SMK Kharisma Nusantara
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2020-2021 <a href="">PPDB Online</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

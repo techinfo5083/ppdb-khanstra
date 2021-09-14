@@ -1,6 +1,6 @@
 <div class="container-fluid"> 
     {{-- shadow-sm mb-5 bg-white rounded --}}
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleCaptions" class="carousel slide"  data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -38,28 +38,57 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div class="container">
-        {{-- <div class="row">
-            <div class="col-lg-12">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">Selamat Datang!</h4>
-                    <p>Formulir Pendaftaran PPDB Online Web SMK-KN Tegalwaru Tahun 2020-2021 <b>Pendaftaran Gratis</b>.</p>
-                    <hr>
-                    <p class="mb-0">Informasi Lebih Lanjut Hubungi Telp/Wa : <b>087823665454</b>.</p>
+        {{-- <hr class="w-50" style="border: 1px solid #8a8888"> --}}
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Selamat Datang {{ auth()->user()->name }}!</h4>
+            <p>PPDB Online Web SMK-KN Tegalwaru Tahun 2020-2021 <b>Pendaftaran Gratis</b>.</p>
+            <hr>
+            <p class="mb-0">Informasi Lebih Lanjut Hubungi Telp/Wa : <b>087823665454</b>.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        Persyaratan
+                    </div>
+                    <div class="card-body">
+                        <h4>Persyaratan</h4>
+                        <ol>
+                            <li type="number">
+                                Pastikan data diri sesuai dengan Kartu keluarga (KK).
+                            </li>
+                            <li type="number">
+                                Isi formulir dengan baik dan benar.
+                            </li>
+                        </ol>
+                    </div>
                 </div>
             </div>
-        </div> --}}
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Info Penting
-                        </div>
-                        <div class="card-body">
-
-                        </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        Alur Pendaftaran
+                    </div>
+                    <div class="card-body">
+                        <h4>Alur Pendaftaran</h4>
+                        <ol>
+                            <li type="number">
+                                Registrasi akun terlebih dahulu dan login.
+                            </li>
+                            <li type="number">
+                                Baca persyaratan pendaftaran PPDB Online.
+                            </li>
+                            <li type="number">
+                                Isi formulir pendaftaran
+                            </li>
+                            <li type="number">
+                                Tunggu pengumuman diterima atau tidaknya.
+                            </li>
+                            <li type="number">
+                                Daftar ulang di sekolah.
+                            </li>
+                        </ol>
                     </div>
                 </div>
             </div>

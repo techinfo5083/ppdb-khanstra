@@ -19,14 +19,14 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition login-page">
-<div class="login-box col-md-6 col-lg-3 col-sm-6 m-auto">
+<div class="login-box container">
     <div class="login-logo">
       <b>Login</b>User
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start</p>
+        <p class="login-box-msg">Login Untuk Memulai</p>
   
         <form action="{{ route('login') }}" method="post">
         @csrf
@@ -57,18 +57,15 @@
                 </span>
             @enderror   
           </div>
-          <div class="row">
-            <div class="col-8">
-              <a href="{{ route('register') }}" class="text-center btn btn-danger">{{ _('Register') }}</a> 
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">
-                    {{ __('Login') }}
-                </button>            
-            </div>
-            <!-- /.col -->
-          </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                {{ __('Login') }}
+            </button>            
+            @if (Route::has('password.request'))
+                <a class="btn btn-link d-inline float-left" href="{{ route('password.request') }}">
+                    {{ __('Lupa Password?') }}
+                </a>
+            @endif
+            <a href="{{ route('register') }}" class="btn btn-link d-inline float-right">{{ _('Register?') }}</a>
         </form>
       </div>
       <!-- /.login-card-body -->
