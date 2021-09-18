@@ -52,5 +52,6 @@ Route::get('/teknikSepedaMotor', function () {
     return view('admin/tsm');
 });
 
+
 Auth::routes();
 

@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+@livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -201,10 +202,15 @@
     </div>
     <!-- ./wrapper -->
 
+    @livewireScripts
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    </script>
+    ...
+    <x-livewire-alert::scripts />
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -213,7 +219,7 @@
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
     <script src="/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
+    <!-- Sparklin -->
     <script src="/plugins/sparklines/sparkline.js"></script>
     <!-- JQVMap -->
     <script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
@@ -238,70 +244,8 @@
     <script src="/plugins/flot/jquery.flot.js"></script>
     <script src="/plugins/flot-old/jquery.flot.resize.min.js"></script>
     <script src="/plugins/flot-old/jquery.flot.pie.min.js"></script>
-    <script>
-        $(function() {
-            /*
-             * DONUT CHART
-             * -----------
-             */
 
-            var donutData = [{
-                    label: 'RPL',
-                    data: 20,
-                    color: '#0073b7'
-                },
-                {
-                    label: 'OM',
-                    data: 20,
-                    color: '#FFA500'
-                },
-                {
-                    label: 'AK',
-                    data: 10,
-                    color: '#32CD32'
-                },
-                {
-                    label: 'TSM',
-                    data: 50,
-                    color: '#FF0000'
-                }
-            ]
-            $.plot('#donut-chart', donutData, {
-                series: {
-                    pie: {
-                        show: true,
-                        radius: 1,
-                        innerRadius: 0.5,
-                        label: {
-                            show: true,
-                            radius: 2 / 3,
-                            formatter: labelFormatter,
-                            threshold: 0.1
-                        }
-
-                    }
-                },
-                legend: {
-                    show: false
-                }
-            })
-            /*
-             * END DONUT CHART
-             */
-
-        })
-
-        /*
-         * Custom Label formatter
-         * ----------------------
-         */
-        function labelFormatter(label, series) {
-            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">' +
-                label +
-                '<br>' +
-                Math.round(series.percent) + '%</div>'
-        }
-    </script>
+    @livewire('admin.pie-chart')
 </body>
 
 </html>

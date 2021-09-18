@@ -66,6 +66,7 @@ class CreatePendaftaran extends Component
         ]);
         
         $this->clearInput();
+        $this->emit('loadDataSiswa', $CalonSiswa);
         $this->alert('success', 'Data Berhasil di Tambahkan!', [
             'position' =>  'top', 
             'timer' =>  3000,  
