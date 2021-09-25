@@ -18,7 +18,7 @@
                 <label for="">Nama Jurusan</label>
                 <input type="text" wire:model="nama_jurusan" class="form-control">
             </div>
-            <button type="reset" wire:click="statusUpdate()" class="btn btn-sm btn-danger float-left">Ubah</button>
+            <button type="reset" wire:click="statusUpdate()" class="btn btn-sm btn-danger float-left">Batal</button>
             <button type="submit" class="btn btn-sm btn-primary float-right">Ubah</button>
         </form>
     </div>

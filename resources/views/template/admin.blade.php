@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PPDB Online Khanstra | Dashboard</title>
+    <title>PPDB Online Khanstra | {{ $tittle }}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -93,7 +93,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="/dashboard" class="nav-link active">
+                            <a href="/dashboard" class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -110,13 +110,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/semuaData" class="nav-link active">
+                                    <a href="/semuaData" class="nav-link {{ (request()->is('semuaData')) ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Semua Jurusan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/rekayasaPerangkatLunak" class="nav-link">
+                                    <a href="/rekayasaPerangkatLunak" class="nav-link {{ (request()->is('rekayasaPerangkatLunak')) ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Rekayasa Perangkat Lunak</p>
                                     </a>
@@ -171,7 +171,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Dashboard</h1>
+                            <h1 class="m-0 text-dark">{{ $tittle }}</h1>
                         </div>
                         <!-- /.col -->
 

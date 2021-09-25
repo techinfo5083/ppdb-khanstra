@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 // Route::get('adminHome', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin:1');
-Route::get('/dashboard', function()  { return view('admin/dashboard'); })->middleware('is_admin');
+Route::get('/dashboard', function()  { $data = ['tittle' => 'Dashboard']; return view('admin/dashboard', $data); })->middleware('is_admin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -37,20 +37,39 @@ Route::get('/pengumuman', function () {
 //     return view('admin/dashboard');
 // });
 Route::get('/semuaData', function () {
-    return view('admin/dataAll');
+    $data = [
+        'tittle' => 'Semua Data'
+    ];
+    return view('admin/dataAll', $data);
 });
 Route::get('/rekayasaPerangkatLunak', function () {
-    return view('admin/rpl');
+    $data = [
+        'tittle' => 'Rekayasa Perangkat Lunak'
+    ];
+    return view('admin/rpl', $data);
 });
 Route::get('/officeManagement', function () {
-    return view('admin/om');
+    $data = [
+        'tittle' => 'Office Managament'
+    ];
+    return view('admin/om', $data);
 });
 Route::get('/akutansi', function () {
-    return view('admin/ak');
+    $data = [
+        'tittle' => 'Komputer Akutansi'
+    ];
+    return view('admin/ak', $data);
 });
 Route::get('/teknikSepedaMotor', function () {
-    return view('admin/tsm');
+    $data = [
+        'tittle' => 'Teknik Sepeda Motor'
+    ];
+    return view('admin/tsm', $data);
 });
+
+Route::get('/printDataSiswa', function() {
+    return view('admin.print.allSiswa');
+})->name('printAllSiswa');
 
 
 Auth::routes();
