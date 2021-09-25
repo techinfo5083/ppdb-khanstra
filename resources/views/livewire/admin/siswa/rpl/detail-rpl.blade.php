@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        Detail Calon Siswa
+        Detail Calon Siswa RPl
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
             </button>

@@ -21,18 +21,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($CalonSiswa as $siswa)
-                        <tr>
-                            <td>{{ $siswa->nama }}</td>
-                            <td>{{ $siswa->nama_sekolah }}</td>
-                            <td class="text-center">{{ $siswa->jk }}</td>
-                            <td>{{ $siswa->nama_jurusan }}</td>
-                            <td class="text-center">
-                                <button  wire:click="getIDSiswa({{ $siswa->id }})" class="btn btn-sm btn-info"><i class="fas fa-info"></i></button>
-                                <button onclick="return confirm('Yakin ingin mengahapus {{ $siswa->nama }} dari data ini?') || event.stopImmediatePropagation()" wire:click="destroy({{ $siswa->id }})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        @endforeach
+                        @if(count($CalonSiswa) == 0)
+                            <div class="alert alert-danger" role="alert">
+                                Data Masih Kosong!
+                            </div>
+                        @else
+                            @foreach($CalonSiswa as $siswa)
+                            <tr>
+                                <td>{{ $siswa->nama }}</td>
+                                <td>{{ $siswa->nama_sekolah }}</td>
+                                <td class="text-center">{{ $siswa->jk }}</td>
+                                <td>{{ $siswa->nama_jurusan }}</td>
+                                <td class="text-center">
+                                    <button  wire:click="getIDSiswa({{ $siswa->id }})" class="btn btn-sm btn-info"><i class="fas fa-info"></i></button>
+                                    <button onclick="return confirm('Yakin ingin mengahapus {{ $siswa->nama }} dari data ini?') || event.stopImmediatePropagation()" wire:click="destroy({{ $siswa->id }})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

@@ -122,19 +122,19 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/officeManagement" class="nav-link">
+                                    <a href="/officeManagement" class="nav-link {{ (request()->is('officeManagement')) ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Office Management</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/akutansi" class="nav-link">
+                                    <a href="/akutansi" class="nav-link {{ (request()->is('akutansi')) ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Akutansi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/teknikSepedaMotor" class="nav-link">
+                                    <a href="/teknikSepedaMotor" class="nav-link {{ (request()->is('teknikSepedaMotor')) ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Teknik Sepeda Motor</p>
                                     </a>

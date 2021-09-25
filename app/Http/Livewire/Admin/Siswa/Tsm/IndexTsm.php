@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Siswa\Rpl;
+namespace App\Http\Livewire\Admin\Siswa\Tsm;
 
 use Livewire\Component;
 use App\Models\Jurusan;
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\DB;
 
-class IndexRpl extends Component
+class IndexTsm extends Component
 {
     public $statusDetail = false;
 
     protected $listeners = [
-        'loadSiswaRpl'
+        'loadSiswaTsm'
     ];
 
     public function render()
@@ -21,36 +21,35 @@ class IndexRpl extends Component
             'CalonSiswa' => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.*', 'jurusan.nama_jurusan')
-                        ->where('kode_jurusan','RPL')
+                        ->where('kode_jurusan','TSM')
                         ->orderBy('nama','asc')
                         ->get(),
             'semua'     => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
-                        ->where('jurusan.kode_jurusan', 'RPL')
+                        ->where('jurusan.kode_jurusan', 'TSM')
                         ->count(),
             'perempuan' => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
                         ->where('jk', 'L')
-                        ->where('jurusan.kode_jurusan', 'RPL')
+                        ->where('jurusan.kode_jurusan', 'TSM')
                         ->count(),
             'laki_laki' => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
                         ->where('jk', 'P')
-                        ->where('jurusan.kode_jurusan', 'RPL')
+                        ->where('jurusan.kode_jurusan', 'TSM')
                         ->count()
         ];
-
-        return view('livewire.admin.siswa.rpl.index-rpl', $data);
+        return view('livewire.admin.siswa.tsm.index-tsm', $data);
     }
 
     public function getIDSiswa($id)
     {
         $this->statusDetail = true;
         $siswaID = CalonSiswa::find($id);
-        $this->emit('showSiswaRpl', $siswaID);
+        $this->emit('showSiswaTsm', $siswaID);
     }
 
     public function destroy($id)
@@ -72,7 +71,7 @@ class IndexRpl extends Component
         ]);
     }
 
-    public function loadSiswaRpl()
+    public function loadSiswaTsm()
     {
         $this->statusDetail = false;
     }

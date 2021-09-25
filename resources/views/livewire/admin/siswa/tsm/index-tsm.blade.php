@@ -1,10 +1,10 @@
 <div class="containert">
     @if($statusDetail)
-        @livewire('admin.siswa.rpl.detail-rpl')
+        @livewire('admin.siswa.tsm.detail-tsm')
     @endif
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Data Siswa Rekayasa Perangkat Lunak</h3>
+            <h3 class="card-title">Data Siswa Teknik Sepeda Motor</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
