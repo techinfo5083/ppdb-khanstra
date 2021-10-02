@@ -7,6 +7,7 @@ use App\Models\CalonSiswa;
 use App\Models\Jurusan;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 
 class Dashboard extends Component
 {
@@ -21,6 +22,7 @@ class Dashboard extends Component
     ];
     public function render()
     {
+
         $data = [
             'CalonSiswa' => DB::table('calon_siswa')
             ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')

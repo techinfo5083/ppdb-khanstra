@@ -1,9 +1,9 @@
 <div class="container">
-    <table class="table table-bordered">
+    <table class="table table-bordered" border="1">
         <tr class="text-center">
             <th>No</th>
             <th>NISN</th>
-            <th colspan="2">Nama</th>
+            <th>Nama</th>
             <th>JK</th>
             <th>Alamat</th>
             <th>Tempat Lahir</th>
@@ -19,7 +19,7 @@
         <tr>
             <td>{{ $i++ }}</td>
             <td>{{ $siswa->nisn }}</td>
-            <td colspan="2">{{ $siswa->nama }}</td>
+            <td>{{ $siswa->nama }}</td>
             <td>{{ $siswa->jk }}</td>
             <td>{{ $siswa->alamat }}</td>
             <td>{{ $siswa->tempat_lahir }}</td>

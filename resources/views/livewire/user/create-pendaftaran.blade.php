@@ -7,11 +7,11 @@
                     <h6>Form Pendaftaran</h6>
                 </div>
                 <div class="card-body">
-                    @if(count($nama_siswa) == null)
+                    @if(count($id_user) == null)
                     <form class="row g-3" wire:submit.prevent="store">
                         <div class="col-md-6">
                             <label for="" class="form-label">No.NISN</label>
-                            <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="" wire:model="nisn">
+                            <input type="number" class="form-control @error('nisn') is-invalid @enderror" id="" wire:model="nisn">
                             @error('nisn')
                                 <div class="invalid-feedback">
                                     {{ $message }}

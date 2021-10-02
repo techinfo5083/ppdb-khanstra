@@ -6,9 +6,14 @@ use Livewire\Component;
 use App\Models\Jurusan;
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
 
 class AllDataSiswa extends Component
 {
+    use WithPagination;
+
+    public $paginate = 5;
+    public $search;
     public $statusDetail = false;
 
     protected $listeners = [
@@ -17,13 +22,23 @@ class AllDataSiswa extends Component
 
     public function render()
     {
+        $CalonSiswa = $this->search === null ?
+                      DB::table('calon_siswa')
+                    ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
+                    ->select('calon_siswa.*', 'jurusan.nama_jurusan')->orderBy('nama','asc')
+                    ->paginate($this->paginate) :
+                    DB::table('calon_siswa')
+                    ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
+                    ->select('calon_siswa.*', 'jurusan.nama_jurusan')->orderBy('nama','asc')
+                    ->where('nama', 'like', '%' . $this->search . '%')
+                    ->orderBy('nama','asc')
+                    ->paginate($this->paginate);
         $data = [
-            'CalonSiswa' => DB::table('calon_siswa')
-            ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
-            ->select('calon_siswa.*', 'jurusan.nama_jurusan')->orderBy('nama','asc')->get(),
+            'CalonSiswa' => $CalonSiswa,
             'semua' => CalonSiswa::all()->count(),
             'perempuan' => CalonSiswa::get()->where('jk', '=', 'P')->count(),
             'laki_laki' => CalonSiswa::get()->where('jk', '=', 'L')->count(),
+            'currentPage' => $CalonSiswa->currentPage()
         ];
         return view('livewire.admin.siswa.all-data-siswa', $data);
     }

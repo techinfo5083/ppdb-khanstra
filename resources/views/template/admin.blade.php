@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
+     <!-- DataTables -->
+    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 @livewireStyles
@@ -91,6 +93,7 @@
             <div class="sidebar">
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
+                    @if(auth()->user()->is_admin == 1)
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="/dashboard" class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}">
@@ -158,6 +161,7 @@
                             </a>
                         </li>
                     </ul>
+                    @endif
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -244,6 +248,9 @@
     <script src="/plugins/flot/jquery.flot.js"></script>
     <script src="/plugins/flot-old/jquery.flot.resize.min.js"></script>
     <script src="/plugins/flot-old/jquery.flot.pie.min.js"></script>
+    <!-- DataTables -->
+    <script src="/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
     @livewire('admin.pie-chart')
 </body>

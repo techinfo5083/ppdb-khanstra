@@ -21,6 +21,6 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect('home')->with('error',"Anda tidak memiliki akases");
+        return redirect()->to('/')->with('error',"Anda tidak memiliki akases");
     }
 }

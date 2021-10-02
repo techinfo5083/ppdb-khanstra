@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 // Route::get('adminHome', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin:1');
-Route::get('/dashboard', function()  { $data = ['tittle' => 'Dashboard']; return view('admin/dashboard', $data); })->middleware('is_admin');
+Route::get('/dashboard', function()  { 
+    $data = ['tittle' => 'Dashboard']; 
+    return view('admin/dashboard', $data); 
+})->middleware('is_admin');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -67,10 +71,11 @@ Route::get('/teknikSepedaMotor', function () {
     return view('admin/tsm', $data);
 });
 
-Route::get('/printDataSiswa', function() {
-    return view('admin.print.allSiswa');
-})->name('printAllSiswa');
-
+Route::get('/export/dataAllSiswa', [\App\Http\Controllers\exportData::class, 'exportAllSiswa'])->name('exportAllSiswa');
+Route::get('/export/dataSiswaRpl', [\App\Http\Controllers\exportData::class, 'exportSiswaRpl'])->name('exportSiswaRpl');
+Route::get('/export/dataSiswaOm', [\App\Http\Controllers\exportData::class, 'exportSiswaOm'])->name('exportSiswaOm');
+Route::get('/export/dataSiswaAk', [\App\Http\Controllers\exportData::class, 'exportSiswaAk'])->name('exportSiswaAk');
+Route::get('/export/dataSiswaTsm', [\App\Http\Controllers\exportData::class, 'exportSiswaTsm'])->name('exportSiswaTsm');
 
 Auth::routes();
 

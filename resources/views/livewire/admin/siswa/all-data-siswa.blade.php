@@ -8,11 +8,28 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <a href="{{ route('printAllSiswa') }}" target="_blank" class="btn btn-primary float-right mb-2"><i class="fas fa-print"></i></a>
+            @if(count($CalonSiswa) !== 0)
+                <a href="{{ route('exportAllSiswa') }}" target="_blank" class="btn btn-danger mb-2"><i class="fas fa-file-pdf fa-1x"></i></a>
+            @endif
+            <br>
+            <div class="row mb-2">
+                <div class="col-sm-8">
+                    <select wire:model="paginate" name="" id="" class="form-control form-control-sm w-auto">
+                        <option value="5">5</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" wire:model="search" name="" id="" class="form-control form-control-sm" placeholder="Cari Nama Calon Siswa...">
+                </div>
+            </div>
             <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
+                        <th>No</th>
+                        <th>NISN</th>
                         <th>Nama</th>
                         <th>Asal Sekolah</th>
                         <th>JK</th>
@@ -26,8 +43,13 @@
                                 Data Masih Kosong!
                             </div>
                         @else
+                        @php
+                            $i = 1 + ($paginate * ($currentPage - 1));
+                        @endphp
                             @foreach($CalonSiswa as $siswa)
                             <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $siswa->nisn }}</td>
                                 <td>{{ $siswa->nama }}</td>
                                 <td>{{ $siswa->nama_sekolah }}</td>
                                 <td class="text-center">{{ $siswa->jk }}</td>
@@ -41,6 +63,7 @@
                         @endif
                     </tbody>
                 </table>
+                {{ $CalonSiswa->links() }}
             </div>
 
             <table>

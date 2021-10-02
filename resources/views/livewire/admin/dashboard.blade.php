@@ -14,7 +14,7 @@
                         <div class="icon">
                             <i class="fas fa-laptop"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="/rekayasaPerangkatLunak" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -29,7 +29,7 @@
                         <div class="icon">
                             <i class="fas fa-money-bill-alt"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="akutansi" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -44,7 +44,7 @@
                         <div class="icon">
                             <i class="fas fa-building"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="officeManagement" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -59,7 +59,7 @@
                         <div class="icon">
                             <i class="fas fa-motorcycle"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="teknikSepedaMotor" class="small-box-footer">Info Lebih <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -73,7 +73,7 @@
                     <!-- Card Live Siswa daftar -->
                     <div class="card">
                         <div class="card-header">
-                            Live Siswa Daftar
+                            Live Siswa Terbaru
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                 </button>
@@ -87,11 +87,13 @@
                                     <tr>
                                         <th>Nama Calon Siswa</th>
                                         <th>Jurusan</th>
+                                        <th>Waktu</th>
                                     </tr>
                                     @foreach($CalonSiswa as $siswa)
                                     <tr>
                                         <td>{{ $siswa->nama }}</td>
                                         <td>{{ $siswa->nama_jurusan }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($siswa->created_at)->diffForHumans() }}</td>
                                     </tr>
                                     @endforeach
                                 </table>

@@ -20,15 +20,16 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box container">
-    <div class="login-logo">
-      <b>Login</b>User
-    </div>
+    {{-- <div class="login-logo">
+      <b>Login</b>
+    </div> --}}
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Login Untuk Memulai</p>
+        <img src="image/Logo.png" width="50" alt="" class="d-inline">
+        <p class="login-box-msg d-inline">Login Untuk Memulai</p>
   
-        <form action="{{ route('login') }}" method="post">
+        <form action="{{ route('login') }}" method="post" class="mt-2">
         @csrf
           <div class="input-group mb-3">
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">

@@ -7,17 +7,20 @@ use App\Models\CalonSiswa;
 use App\Models\Jurusan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class CreatePendaftaran extends Component
 {
     public $nisn, $nama, $jk, $alamat, $tempat_lahir;
     public $tgl_lahir, $nama_sekolah, $id_jurusan, $no_telp;
+    public $confirmForAdmin = false;
 
     public function render()
     {
         $data = [
             'jurusan' => Jurusan::all(),
-            'nama_siswa' => CalonSiswa::select('nama')->where('id_user',auth()->user()->id)->get(),
+            'id_user' => CalonSiswa::select('id_user')->where('id_user',auth()->user()->id)->get(),
+            'id'      => auth()->user()->id, 
         ];
         
         // $id_user = CalonSiswa::select('nama')->where('id_user',auth()->user()->id)->get();
@@ -41,7 +44,7 @@ class CreatePendaftaran extends Component
     public function store()
     {
         $this->validate([
-            'nisn'          => 'required|max:15',
+            'nisn'          => 'required|unique:calon_siswa|max:15|min:10',
             'nama'          => 'required',
             'jk'            => 'required',
             'alamat'        => 'required',
@@ -80,9 +83,21 @@ class CreatePendaftaran extends Component
 
     }
 
-    public function sudahDaftar()
+    public function confirmUpdate($id)
     {
-
+        $this->confirmForAdmin = true;
+        $user = $id;
+        $this->emit('confirmUpdateUser', $user);
+        $this->alert('success', 'Berhasil melakukan pengajuan!', [
+            'position' =>  'top', 
+            'timer' =>  3000,  
+            'toast' =>  true, 
+            'text' =>  '', 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+        ]);
     }
 
 }

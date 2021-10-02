@@ -26,6 +26,7 @@ class HomeController extends Controller
     {
         if(auth()->user()->is_admin == 1)
         {
+            
             return redirect('/dashboard');
         } elseif( auth()->user()->is_admin == 0)
         {
@@ -36,8 +37,4 @@ class HomeController extends Controller
         }
     }
 
-    public function adminHome()
-    {
-        return view('adminHome');
-    }
 }

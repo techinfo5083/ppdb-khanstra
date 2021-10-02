@@ -10,4 +10,5 @@ class CalonSiswa extends Model
     use HasFactory;
     public $table = "calon_siswa";
     protected $guarded = [];
+    
 }

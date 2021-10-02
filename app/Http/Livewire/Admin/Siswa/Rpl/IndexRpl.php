@@ -6,9 +6,14 @@ use Livewire\Component;
 use App\Models\Jurusan;
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
 
 class IndexRpl extends Component
 {
+    use WithPagination;
+
+    public $paginate = 5;
+    public $search;
     public $statusDetail = false;
 
     protected $listeners = [
@@ -17,13 +22,22 @@ class IndexRpl extends Component
 
     public function render()
     {
-        $data = [
-            'CalonSiswa' => DB::table('calon_siswa')
+        $CalonSiswa = $this->search === null ?
+                      DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.*', 'jurusan.nama_jurusan')
                         ->where('kode_jurusan','RPL')
                         ->orderBy('nama','asc')
-                        ->get(),
+                        ->paginate($this->paginate) :
+                        DB::table('calon_siswa')
+                        ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
+                        ->select('calon_siswa.*', 'jurusan.nama_jurusan')
+                        ->where('kode_jurusan','RPL')
+                        ->where('nama', 'like', '%' . $this->search . '%')
+                        ->orderBy('nama','asc')
+                        ->paginate($this->paginate);
+        $data = [
+            'CalonSiswa' => $CalonSiswa,
             'semua'     => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
@@ -40,7 +54,8 @@ class IndexRpl extends Component
                         ->select('calon_siswa.jk')
                         ->where('jk', 'P')
                         ->where('jurusan.kode_jurusan', 'RPL')
-                        ->count()
+                        ->count(),
+            'currentPage' => $CalonSiswa->currentPage()
         ];
 
         return view('livewire.admin.siswa.rpl.index-rpl', $data);

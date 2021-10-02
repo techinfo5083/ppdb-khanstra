@@ -6,9 +6,14 @@ use Livewire\Component;
 use App\Models\Jurusan;
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
 
 class IndexAk extends Component
 {
+    use WithPagination;
+
+    public $paginate = 5;
+    public $search;
     public $statusDetail = false;
 
     protected $listeners = [
@@ -17,30 +22,41 @@ class IndexAk extends Component
 
     public function render()
     {
-        $data = [
-            'CalonSiswa' => DB::table('calon_siswa')
+        $CalonSiswa = $this->search === null ?
+                      DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.*', 'jurusan.nama_jurusan')
-                        ->where('kode_jurusan','AK')
+                        ->where('kode_jurusan','KA')
                         ->orderBy('nama','asc')
-                        ->get(),
+                        ->paginate($this->paginate) :
+                        DB::table('calon_siswa')
+                        ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
+                        ->select('calon_siswa.*', 'jurusan.nama_jurusan')
+                        ->where('kode_jurusan','KA')
+                        ->orderBy('nama','asc')
+                        ->where('nama', 'like', '%' . $this->search . '%')
+                        ->orderBy('nama','asc')
+                        ->paginate($this->paginate);
+        $data = [
+            'CalonSiswa' => $CalonSiswa,
             'semua'     => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
-                        ->where('jurusan.kode_jurusan', 'Ak')
+                        ->where('jurusan.kode_jurusan', 'KA')
                         ->count(),
             'perempuan' => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
                         ->where('jk', 'L')
-                        ->where('jurusan.kode_jurusan', 'AK')
+                        ->where('jurusan.kode_jurusan', 'KA')
                         ->count(),
             'laki_laki' => DB::table('calon_siswa')
                         ->join('jurusan', 'calon_siswa.id_jurusan', '=', 'jurusan.id')
                         ->select('calon_siswa.jk')
                         ->where('jk', 'P')
-                        ->where('jurusan.kode_jurusan', 'AK')
-                        ->count()
+                        ->where('jurusan.kode_jurusan', 'KA')
+                        ->count(),
+            'currentPage' => $CalonSiswa->currentPage()
         ];
         return view('livewire.admin.siswa.ak.index-ak', $data);
     }
